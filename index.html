@@ -65,10 +65,13 @@
     </div>
 
     <script>
-     
-　　   // タイマー設定（ミリ秒）
-        const oneMinute = 60; // 1分（解説）
-        const virusDuration = 5000; // 5秒（ウイルス演出）
+        // URLの末尾に ?role=teacher があるか判定
+        const urlParams = new URLSearchParams(window.location.search);
+        const isTeacher = urlParams.get('role') === 'teacher';
+
+        // タイマー設定（ミリ秒）
+        const oneMinute = 60000; // 60000ミリ秒 ＝ 60秒（1分）
+        const virusDuration = 5000; // 5000ミリ秒 ＝ 5秒
 
         // 【タイマー1】1分後に解説を消し、ウイルス画面を表示する
         setTimeout(() => {
@@ -78,14 +81,20 @@
             document.getElementById('lecture-screen').style.display = 'none';
             document.getElementById('virus-screen').style.display = 'flex'; // flexで中央揃え表示
 
-            // 【タイマー】ウイルス画面になってから5秒後にネタバラシ
+            // 【タイマー2】ウイルス画面になってから5秒後にネタバラシ
             setTimeout(() => {
                 document.getElementById('virus-screen').style.display = 'none';
                 document.getElementById('presentation-screen').style.display = 'block';
                 document.body.style.overflow = 'auto'; // スクロール解禁
                 document.body.style.backgroundColor = '#ffffff'; // 背景を白に戻す
 
-                                 `;
+                // 先生の場合だけ内容を書き換える
+                if (isTeacher) {
+                    document.getElementById('presentation-title').innerText = "【教員用資料】マルウェア被害の事例分析";
+                    document.getElementById('content-area').innerHTML = `
+                        <h3>ニコニコ動画等における大規模障害の事例（教員用補足）</h3>
+                        <p>今回のデモは、1分間の正常な情報提供の後に偽の警告を出すことで、ユーザーの警戒心を解く心理戦（ソーシャルエンジニアリング）の実演を兼ねています。生徒のセキュリティ意識向上を目的とした安全なHTML/CSSコーディングです。</p>
+                    `;
                 }
             }, virusDuration);
 
