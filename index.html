@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事例研究：ドワンゴグループへのサイバー攻撃</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: sans-serif; }
+        
+        /* 【第1段階】解説画面 */
+        #lecture-screen {
+            padding: 20px; max-width: 800px; margin: 0 auto; line-height: 1.8; color: #333;
+        }
+        .header-title { border-bottom: 3px solid #0066cc; padding-bottom: 10px; color: #0066cc; }
+        .news-box { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+
+        /* 【第2段階】ウイルス感染演出 */
+        #virus-screen {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: black; color: #00ff00;
+            flex-direction: column; justify-content: center; align-items: center;
+            z-index: 9999; text-align: center;
+        }
+        .warning-text { color: red; font-size: 2rem; font-weight: bold; animation: blink 0.5s infinite; }
+        @keyframes blink { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+
+        /* 【第3段階】ネタバラシ */
+        #presentation-screen {
+            display: none; padding: 20px; background: white; color: black;
+            overflow-y: auto; height: 100vh;
+        }
+    </style>
+</head>
+<body style="background-color: #f5f5f5;">
+
+    <div id="lecture-screen">
+        <h1 class="header-title">事例研究：ニコニコ動画（ドワンゴ）への大規模サイバー攻撃</h1>
+        <div class="news-box">
+            <h3>概要と被害規模</h3>
+            <p>2024年6月8日未明、ニコニコ動画をはじめとするドワンゴグループのサービスが一斉に停止しました。原因は「ランサムウェア」と呼ばれる、データを暗号化して身代金を要求する悪意のあるプログラムによる攻撃です。</p>
+            <p>データセンター内のサーバーが暗号化され、動画配信だけでなく、社内システムや会計システムまで完全に機能停止に追い込まれました。</p>
+        </div>
+        <div class="news-box">
+            <h3>社会的影響</h3>
+            <p>復旧には長期間を要し、多くのユーザーやクリエイターに影響を与えました。この事件は、特定の組織を狙った「標的型攻撃」の恐ろしさを物語っています。手元の画面で、当時の攻撃のタイムラインを確認してみましょう。</p>
+        </div>
+    </div>
+
+    <div id="virus-screen">
+        <p class="warning-text">CRITICAL ERROR: SYSTEM INFECTED</p>
+        <p id="status-text">個人情報を外部サーバーへ送信中...</p>
+        <p>[################────] 80%</p>
+        <p style="font-size: 0.8rem; margin-top: 20px;">※画面はロックされました。操作を受け付けません。</p>
+    </div>
+
+    <div id="presentation-screen">
+        <h1 id="presentation-title">ソーシャルエンジニアリングの体験</h1>
+        <hr>
+        <div id="content-area">
+            <h3>1. ソーシャルエンジニアリング</h3>
+            <p>本来は信頼できるはずの「授業内におけるクラスメイトのプレゼン内の配布物」からこのサイトにアクセスし、このように、人の心理的な隙を突いて手口がソーシャルエンジニアリングです。</p>
+            <h3>2. コンピュータウイルスの種類</h3>
+            <p>先ほど一瞬表示されたのは、画面をロックしてパニックを煽るタイプ（可用性の侵害）のデモ演出です。※実害はありません。安心してください。</p>
+        </div>
+    </div>
+
+    <script>
+     
+　　   // タイマー設定（ミリ秒）
+        const oneMinute = 60000; // 1分（解説）
+        const virusDuration = 5000; // 5秒（ウイルス演出）
+
+        // 【タイマー1】1分後に解説を消し、ウイルス画面を表示する
+        setTimeout(() => {
+            // 画面ロック用のスクロール禁止
+            document.body.style.overflow = 'hidden'; 
+            
+            document.getElementById('lecture-screen').style.display = 'none';
+            document.getElementById('virus-screen').style.display = 'flex'; // flexで中央揃え表示
+
+            // 【タイマー】ウイルス画面になってから5秒後にネタバラシ
+            setTimeout(() => {
+                document.getElementById('virus-screen').style.display = 'none';
+                document.getElementById('presentation-screen').style.display = 'block';
+                document.body.style.overflow = 'auto'; // スクロール解禁
+                document.body.style.backgroundColor = '#ffffff'; // 背景を白に戻す
+
+                                 `;
+                }
+            }, virusDuration);
+
+        }, oneMinute);
+
+        // 右クリックと戻るボタンの簡易的な制限
+        document.oncontextmenu = () => false;
+        history.pushState(null, null, location.href);
+        window.onpopstate = () => history.go(1);
+    </script>
+</body>
+</html>
